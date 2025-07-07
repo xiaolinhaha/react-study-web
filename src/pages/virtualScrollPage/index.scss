@@ -1,0 +1,297 @@
+.virtual-scroll-page {
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 30px;
+    
+    h1 {
+      color: #333;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+  }
+  
+    .content-area {
+    display: flex;
+    gap: 24px;
+    min-height: 800px;
+    
+    // 左侧面板样式
+    .left-panel {
+      flex: 0 0 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      
+      // 功能说明样式
+      .feature-description {
+        .description-content {
+          background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+          border: 1px solid #dee2e6;
+          border-radius: 12px;
+          padding: 24px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          
+          h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+          
+          ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            
+            li {
+              padding: 4px 6px;
+              font-size: 14px;
+              color: #155724;
+              background: #d4edda;
+              border-radius: 8px;
+              border-left: 4px solid #28a745;
+              font-weight: 500;
+              transition: all 0.3s ease;
+              
+              &:hover {
+                transform: translateX(4px);
+                box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+              }
+            }
+          }
+        }
+      }
+      
+      // 技术说明样式
+      .tech-description {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 1px solid #90caf9;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        
+        h4 {
+          color: #1565c0;
+          margin-bottom: 20px;
+          font-size: 18px;
+          font-weight: 600;
+        }
+        
+        .tech-items {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          
+          .tech-item {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background: rgba(255, 255, 255, 0.95);
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+            }
+            
+            strong {
+              display: block;
+              color: #1565c0;
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 6px;
+            }
+            
+            p {
+              color: #424242;
+              font-size: 13px;
+              line-height: 1.5;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+    
+    // 右侧面板样式
+    .right-panel {
+      flex: 1;
+      min-width: 0; // 防止flex item溢出
+      
+      .demo-section {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        h2 {
+          color: #444;
+          margin-bottom: 20px;
+          border-bottom: 2px solid #007bff;
+          padding-bottom: 10px;
+          flex-shrink: 0;
+        }
+        
+        // 确保DynamicVirtualContainer占满剩余空间
+        > * {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 1200px) {
+  .virtual-scroll-page {
+    .content-area {
+      .left-panel {
+        flex: 0 0 320px;
+        
+        .feature-description .description-content,
+        .tech-description {
+          padding: 20px;
+        }
+        
+        .tech-description .tech-items .tech-item {
+          padding: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .virtual-scroll-page {
+    .content-area {
+      flex-direction: column;
+      min-height: auto;
+      
+      .left-panel {
+        flex: none;
+        order: 2; // 将左侧面板放到下方
+        
+        .tech-description {
+          .tech-items {
+            .tech-item {
+              p {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      
+      .right-panel {
+        order: 1; // 将右侧演示放到上方
+        
+        .demo-section {
+          height: 600px; // 移动端固定高度
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .virtual-scroll-page {
+    padding: 8px;
+    
+    .page-header {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+    }
+    
+    .content-area {
+      gap: 16px;
+      
+      .left-panel {
+        gap: 16px;
+        
+        .feature-description .description-content {
+          padding: 16px;
+          
+          h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+          }
+          
+          ul li {
+            padding: 10px 14px;
+            font-size: 13px;
+          }
+        }
+        
+        .tech-description {
+          padding: 16px;
+          
+          h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          
+          .tech-items {
+            gap: 12px;
+            
+            .tech-item {
+              padding: 12px;
+              
+              strong {
+                font-size: 13px;
+              }
+              
+              p {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      
+      .right-panel {
+        .demo-section {
+          height: 500px;
+          
+          h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .virtual-scroll-page {
+    padding: 8px;
+    
+    .content-area {
+      .right-panel {
+        .demo-section {
+          height: 400px;
+        }
+      }
+    }
+  }
+} 
